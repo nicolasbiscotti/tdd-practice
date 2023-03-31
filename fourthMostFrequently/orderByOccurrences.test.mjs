@@ -33,4 +33,30 @@ describe("orderByOccurrences test", function () {
   it('should return ["B", "C" "A"] for ABBCC', function () {
     expect(orderByOccurrences("ABBCC")).to.deep.equal(["B", "C", "A"]);
   });
+
+  it('should return ["A", "B", "C"] for ABACCBDD', function () {
+    expect(orderByOccurrences("ABACCBDD", 3)).to.deep.equal(["A", "B", "C"]);
+  });
+
+  it("should throw You want top 4, but only 3 characters are available.", function () {
+    expect(function() {
+      orderByOccurrences("ABBCC", 4);
+    }).to.throw(
+      "You want top 4, but only 3 characters are available"
+    );
+  });
+
+  it("example", () => {
+    console.log(
+      "input --> 'AAAACCAAYY'",
+      "output -->",
+      JSON.stringify(orderByOccurrences("AAAACCAAYY"))
+    );
+
+    console.log(
+      "input --> 'ATBBBBBBBBBBAADERTTTDDWWEMTAAAA'",
+      "output -->",
+      JSON.stringify(orderByOccurrences("ATBBBBBBBBBBAADERTTTDDWWEMTAAAA"))
+    );
+  });
 });

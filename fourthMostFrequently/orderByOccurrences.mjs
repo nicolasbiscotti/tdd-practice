@@ -1,4 +1,4 @@
-export default function orderByOccurrences(inputString) {
+export default function orderByOccurrences(inputString, top) {
   let characters = [];
   const charactersByOccurrences = new Map();
   function addOccurrences(character, repository) {
@@ -11,7 +11,6 @@ export default function orderByOccurrences(inputString) {
   function mostFrequently(repository) {
     let graterOccurrences = 0;
     let character = "";
-
     for (const key of repository.keys()) {
       if (repository.get(key) > graterOccurrences) {
         character = key;
@@ -37,7 +36,11 @@ export default function orderByOccurrences(inputString) {
 
   characters = orderDescByOccurrences(charactersByOccurrences);
 
-  console.log(charactersByOccurrences);
-
-  return characters;
+  if (top && top > characters.length) {
+    throw new Error(
+      `You want top ${top}, but only ${characters.length} characters are available`
+    );
+  } else {
+    return characters.slice(0, top);
+  }
 }
